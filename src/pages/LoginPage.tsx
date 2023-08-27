@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -15,10 +15,14 @@ import {
 } from 'recoil';
 
 import { Avatar, Button, Container, CssBaseline, ThemeProvider, Typography, createTheme } from '@mui/material';
+import textState from '../states/state';
 
 const defaultTheme = createTheme();
 
 function LoginPage() {
+  const [text, setText] = useRecoilState(textState);
+
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -56,6 +60,7 @@ function LoginPage() {
                   name="email"
                   autoComplete="email"
                   autoFocus
+                  defaultValue={text}
                 />
                 <TextField
                   margin="normal"

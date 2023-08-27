@@ -1,6 +1,7 @@
 import { useRecoilState,useRecoilValue } from "recoil";
 import charCountState from "../states/charCountState";
 import textState from "../states/state";
+import { useEffect } from "react";
 
 function CharacterCounter() {
     return (
@@ -25,6 +26,10 @@ function CharacterCounter() {
     const onChange = (event) => {
       setText(event.target.value);
     };
+
+    useEffect(()=>{
+      console.log(text)
+    },[text])
   
     return (
       <div>
