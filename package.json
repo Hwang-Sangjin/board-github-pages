@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "proxy": "https://board-back-8248f9e2f060.herokuapp.com/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

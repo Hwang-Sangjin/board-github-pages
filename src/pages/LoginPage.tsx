@@ -16,6 +16,8 @@ import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import SERVER_URL from "../ServerURL";
+import { useRecoilState } from "recoil";
+import userDataState from "../states/userDataState";
 
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -60,6 +62,8 @@ function ColorSchemeToggle({ onClick, ...props }: IconButtonProps) {
  * This template uses [`Inter`](https://fonts.google.com/specimen/Inter?query=inter) font.
  */
 export default function LoginPage() {
+
+  const [userData, setUserData] = useRecoilState(userDataState);
   const navigate = useNavigate();
 
   const RouteToSignupPage = () => {
@@ -68,9 +72,17 @@ export default function LoginPage() {
 
   async function TryLogin(data: { email: string; password: string }) {
     try {
-      await axios.post(`${SERVER_URL}/login`, data).then(function (res) {
+      await axios.post(`${SERVER_URL}/user/login`, data,{
+        headers: {
+        'Content-Type': 'application/json'
+        }}).then(function (res) {
         console.log(res);
-
+        const {id,email,name} = res.data.payload;
+        setUserData({
+          id: id,
+            username: name,
+            email: email,
+        })
         //성공시 userDataState 변경
         navigate("/main");
       });

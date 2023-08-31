@@ -21,7 +21,6 @@ interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
   name: HTMLInputElement;
   password: HTMLInputElement;
-  passwordConfirm: HTMLInputElement;
 }
 interface SignInFormElement extends HTMLFormElement {
   readonly elements: FormElements;
@@ -70,7 +69,11 @@ export default function LoginPage() {
 
   async function TrySignup(data: { email: string; password: string }) {
     try {
-      await axios.post(`${SERVER_URL}/signup`, data).then(function (res) {
+      await axios.post(`${SERVER_URL}/user`, data,{
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      }).then(function (res) {
         console.log(res);
         RouteToLoginPage();
       });
@@ -190,7 +193,6 @@ export default function LoginPage() {
                   email: formElements.email.value,
                   name: formElements.name.value,
                   password: formElements.password.value,
-                  passwordConfirm: formElements.passwordConfirm.value,
                 };
                 TrySignup(data);
               }}
@@ -207,10 +209,7 @@ export default function LoginPage() {
                 <FormLabel>Password</FormLabel>
                 <Input type="password" name="password" />
               </FormControl>
-              <FormControl required>
-                <FormLabel>Password Confirm</FormLabel>
-                <Input type="password" name="passwordConfirm" />
-              </FormControl>
+
               <Box
                 sx={{
                   display: "flex",

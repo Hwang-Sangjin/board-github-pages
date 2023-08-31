@@ -148,7 +148,7 @@ export default function Sidebar() {
           <Typography fontSize="sm" fontWeight="lg">
             {userData.username}
           </Typography>
-          <Typography level="body-xs">{userData.name}</Typography>
+          <Typography level="body-xs">{userData.email}</Typography>
         </Box>
         <IconButton variant="plain" color="neutral">
           <i data-feather="log-out" />
