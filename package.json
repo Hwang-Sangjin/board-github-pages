@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "proxy": "https://board-back-8248f9e2f060.herokuapp.com/",
-  "homepage": "http://Hwang-Sangjin.github.io/board-github-pages",
+  "homepage": "http://Hwang-Sangjin.github.io/board-github-pages/index.html",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
