@@ -11,11 +11,11 @@ import {
 } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import ChatPage from "./pages/ChatPage.tsx";
-import MainPage from "./pages/MainPAge.tsx";
+import MainPage from "./pages/MainPage.tsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/board-github-pages",
     element: <LoginPage />,
   },
   {
