@@ -161,7 +161,7 @@ export default function LoginPage() {
           >
             <div>
               <Typography component="h1" fontSize="xl2" fontWeight="lg">
-                Sign in to your account
+                Log in to your account
               </Typography>
               <Typography level="body-sm" sx={{ my: 1, mb: 3 }}>
                 Welcome back
@@ -177,6 +177,7 @@ export default function LoginPage() {
                   persistent: formElements.persistent.checked,
                 };
                 alert(JSON.stringify(data, null, 2));
+                navigate("/main");
               }}
             >
               <FormControl required>
@@ -204,7 +205,7 @@ export default function LoginPage() {
                 </Link>
               </Box>
               <Button type="submit" fullWidth>
-                Sign in
+                Log in
               </Button>
             </form>
             <Button

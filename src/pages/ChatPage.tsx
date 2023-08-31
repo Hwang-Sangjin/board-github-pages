@@ -6,12 +6,12 @@ import Box from "@mui/joy/Box";
 import useScript from "../Chat/useScript";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
-import PostContainer from "../components/PostContainer";
+import MyProfile from "../components/MyMessages";
 
 const useEnhancedEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
-export default function MainPage() {
+export default function ChatPage() {
   const status = useScript(`https://unpkg.com/feather-icons`);
 
   useEnhancedEffect(() => {
@@ -41,7 +41,7 @@ export default function MainPage() {
         <Header />
         <Sidebar />
         <Box component="main" className="MainContent" sx={{ flex: 1 }}>
-          <PostContainer />
+          <MyProfile />
         </Box>
       </Box>
     </CssVarsProvider>
