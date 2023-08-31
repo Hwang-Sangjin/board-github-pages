@@ -17,8 +17,12 @@ import Sheet from "@mui/joy/Sheet";
 import ColorSchemeToggle from "./ColorScheme.Toggle";
 import { closeSidebar } from "../Chat/utils";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import userDataState from "../states/userDataState";
 
 export default function Sidebar() {
+  const [userData, setUserData] = useRecoilState(userDataState);
+
   const navigate = useNavigate();
   const RouteToMessages = () => {
     navigate("/chat");
@@ -142,9 +146,9 @@ export default function Sidebar() {
       <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
         <Box sx={{ minWidth: 0, flex: 1 }}>
           <Typography fontSize="sm" fontWeight="lg">
-            Steve E.
+            {userData.username}
           </Typography>
-          <Typography level="body-xs">@steveEberger</Typography>
+          <Typography level="body-xs">{userData.name}</Typography>
         </Box>
         <IconButton variant="plain" color="neutral">
           <i data-feather="log-out" />

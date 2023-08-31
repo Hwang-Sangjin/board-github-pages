@@ -14,11 +14,14 @@ import Typography from "@mui/joy/Typography";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import { useNavigate } from "react-router-dom";
+import SERVER_URL from "../ServerURL";
+import axios from "axios";
 
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
+  name: HTMLInputElement;
   password: HTMLInputElement;
-  persistent: HTMLInputElement;
+  passwordConfirm: HTMLInputElement;
 }
 interface SignInFormElement extends HTMLFormElement {
   readonly elements: FormElements;
@@ -60,9 +63,21 @@ function ColorSchemeToggle({ onClick, ...props }: IconButtonProps) {
  */
 export default function LoginPage() {
   const navigate = useNavigate();
+
   const RouteToLoginPage = () => {
     navigate("/login");
   };
+
+  async function TrySignup(data: { email: string; password: string }) {
+    try {
+      await axios.post(`${SERVER_URL}/signup`, data).then(function (res) {
+        console.log(res);
+        RouteToLoginPage();
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
@@ -173,10 +188,11 @@ export default function LoginPage() {
                 const formElements = event.currentTarget.elements;
                 const data = {
                   email: formElements.email.value,
+                  name: formElements.name.value,
                   password: formElements.password.value,
-                  persistent: formElements.persistent.checked,
+                  passwordConfirm: formElements.passwordConfirm.value,
                 };
-                alert(JSON.stringify(data, null, 2));
+                TrySignup(data);
               }}
             >
               <FormControl required>
@@ -184,12 +200,16 @@ export default function LoginPage() {
                 <Input type="email" name="email" />
               </FormControl>
               <FormControl required>
+                <FormLabel>Name</FormLabel>
+                <Input type="text" name="name" />
+              </FormControl>
+              <FormControl required>
                 <FormLabel>Password</FormLabel>
                 <Input type="password" name="password" />
               </FormControl>
               <FormControl required>
                 <FormLabel>Password Confirm</FormLabel>
-                <Input type="password" name="password" />
+                <Input type="password" name="passwordConfirm" />
               </FormControl>
               <Box
                 sx={{

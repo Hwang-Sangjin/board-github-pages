@@ -14,11 +14,12 @@ import Typography from "@mui/joy/Typography";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import SERVER_URL from "../ServerURL";
 
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
   password: HTMLInputElement;
-  persistent: HTMLInputElement;
 }
 interface SignInFormElement extends HTMLFormElement {
   readonly elements: FormElements;
@@ -60,9 +61,23 @@ function ColorSchemeToggle({ onClick, ...props }: IconButtonProps) {
  */
 export default function LoginPage() {
   const navigate = useNavigate();
+
   const RouteToSignupPage = () => {
     navigate("/signup");
   };
+
+  async function TryLogin(data: { email: string; password: string }) {
+    try {
+      await axios.post(`${SERVER_URL}/login`, data).then(function (res) {
+        console.log(res);
+
+        //성공시 userDataState 변경
+        navigate("/main");
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
@@ -174,10 +189,8 @@ export default function LoginPage() {
                 const data = {
                   email: formElements.email.value,
                   password: formElements.password.value,
-                  persistent: formElements.persistent.checked,
                 };
-                alert(JSON.stringify(data, null, 2));
-                navigate("/main");
+                TryLogin(data);
               }}
             >
               <FormControl required>
