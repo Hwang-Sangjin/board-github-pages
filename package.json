@@ -6,7 +6,8 @@
   "proxy": "https://board-back-8248f9e2f060.herokuapp.com/",
   "homepage": "http://Hwang-Sangjin.github.io/board-github-pages",
   "engines": {
-    "node": "16.x"
+    "node": "16.x",
+    "npm": "8.19.3"
   },
   "scripts": {
     "dev": "vite",
