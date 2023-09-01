@@ -15,7 +15,7 @@ import MainPage from "./pages/MainPage.tsx";
 
 const router = createBrowserRouter([
   {
-    path: "/board-github-pages",
+    path: "/",
     element: <LoginPage />,
   },
   {
